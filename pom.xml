@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.4.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<modules>
+        <module>gateway-basic</module>
+        <module>gateway-swagger</module>
+        <module>gateway-dynamic-route</module>
+		<module>gateway-cutomizer</module>
+	</modules>
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.aihuishou.gateway</groupId>
+	<artifactId>gateway</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>gateway</name>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<spring-cloud.version>Finchley.SR1</spring-cloud.version>
+	</properties>
+
+	<dependencyManagement>
+
+		<dependencies>
+
+			<!-- reactive redis 用于限流实现 -->
+			<!--<dependency>-->
+				<!--<groupId>org.springframework.boot</groupId>-->
+				<!--<artifactId>spring-boot-starter-data-redis-reactive</artifactId>-->
+			<!--</dependency>-->
+			<!--&lt;!&ndash; spring boot 2.x以后 redis客户端默认使用lettuce, lettuce连接池需显示依赖commons-pool2 &ndash;&gt;-->
+			<!--<dependency>-->
+				<!--<groupId>org.apache.commons</groupId>-->
+				<!--<artifactId>commons-pool2</artifactId>-->
+			<!--</dependency>-->
+
+			<!--spring cloud-->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<!--swagger-->
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger-ui</artifactId>
+				<version>2.9.2</version>
+			</dependency>
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger2</artifactId>
+				<version>2.9.2</version>
+			</dependency>
+
+			<!--nacos client-->
+			<dependency>
+				<groupId>com.alibaba.boot</groupId>
+				<artifactId>nacos-config-spring-boot-starter</artifactId>
+				<version>0.2.0-RC1</version>
+			</dependency>
+
+		</dependencies>
+
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+
+</project>

@@ -1,0 +1,128 @@
+#spring:
+#  # 完整Spring-Cloud-Gateway 配置参照官网文档: http://cloud.spring.io/spring-cloud-gateway/single/spring-cloud-gateway.html
+#  cloud:
+#    gateway:
+#      # 跨域设置 配置类GlobalCorsProperties
+#      globalcors:
+#        # 具体配置项来自于spring框架的跨域设置: https://docs.spring.io/spring/docs/5.0.x/javadoc-api/org/springframework/web/cors/CorsConfiguration.html
+#        corsConfigurations:
+#          '[/**]':
+#            allowedOrigins: '*'
+#            allowedMethods:
+#            - '*'
+#            allowedHeaders:
+#            - '*'
+#            allowCredentials: true
+#            maxAge: 1800
+#
+#      # TLS / SSL
+##      httpclient:
+##        ssl:
+##          # 信任所有证书,不建议用于生产环境,不安全.
+##          useInsecureTrustManager: true
+#          # 生产环境下建议配置ssl证书.
+##          trustedX509Certificates:
+##            - cert1.pem
+##            - cert2.pem
+#
+#      # ================================================================================================
+#      # 这里设置的是默认所有路由规则都添加的filter,这个名称的规则是,类名称去掉后面的(GatewayFilterFactory),
+#      # 比如我这里ResponseCheckGatewayFilterFactory就等于ResponseCheck,如果没有使用这个后缀就是类的全名称
+#      # 这里可以配置一组filter.
+#      # note: 还有一种全局filer不需要配置就对所有路由起作用,参见 MyGlobalFilter.java
+#      # ================================================================================================
+#      default-filters:
+#        - ResponseCheck
+#
+#      # 路由规则.
+#      routes:
+#        # ====================================================================
+#        # 时间区间规则路由,根据当前时间进行路由分配.
+#        # 多条规则默认order按先后定义顺序执行,显示配置order属性后按照order从小到大优先.
+#        # - Path指定了路径匹配,如不配置则匹配所有请求.
+#        # 可访问演示 http://localhost:8080/after_or_before_or_between
+#        # ====================================================================
+#        #After Route Predicate.
+#        - id: after_route
+#          uri: http://localhost:8080/
+#          order: 2
+#          predicates:
+#            - Path=/after_or_before_or_between/**
+#              #ZonedDateTime 格式.
+#            - After=2018-09-13T13:00:00.000+08:00[Asia/Shanghai]
+#
+#        #Before Route Predicate.
+#        - id: before_route
+#          uri: http://localhost:8080
+#          order: 1
+#          predicates:
+#            - Path=/after_or_before_or_between/**
+#              #ZonedDateTime 格式.
+#            - Before=2018-10-13T13:00:00.000+08:00[Asia/Shanghai]
+#
+#        #Between Route Predicate.
+#        - id: between_route
+#          uri: http://localhost:8080
+#          order: 0
+#          predicates:
+#            - Path=/after_or_before_or_between/**
+#              #ZonedDateTime 格式.
+#            - Between=2018-09-13T13:00:00.000+08:00[Asia/Shanghai], 2018-10-13T13:00:00.000+08:00[Asia/Shanghai]
+#
+#        # ================================================
+#        # 请求参数规则路由.
+#        # 参数的值可以使用正则表达式.
+#        # 可访问演示 http://localhost:8080/shopping?mall=tb
+#        # ================================================
+#        #Query Route Predicate.
+#        - id: query_route_jd
+#          uri: http://www.jd.com
+#          predicates:
+#            - Path=/shopping/**
+#            - Query=mall, jd
+#
+#        - id: query_route_tb
+#          uri: http://www.taobao.com
+#          predicates:
+#            - Path=/shopping/**
+#            - Query=mall, tb
+#
+#        # ========================================================================
+#        # 权重路由.
+#        # 目前有bug,第一次访问会报错,再次访问正常.
+#        # 见 issue https://github.com/spring-cloud/spring-cloud-gateway/issues/332
+#        # 可访问演示 http://localhost:8080/w
+#        # ========================================================================
+#        - id: weight_route1
+#          uri: http://localhost:8080/weight/v1
+#          predicates:
+#            - Path=/w/**
+#            - Weight=weight,20
+#
+#        - id: weight_route2
+#          uri: http://localhost:8080/weight/v2
+#          predicates:
+#            - Path=/w/**
+#            - Weight=weight,80
+
+        # =============================================================
+        # 还支持Cookie,Header,Host,Method,RemoteAddr等规则,不常用这里不演示
+        # =============================================================
+
+        # Filter
+        # ======================================================
+
+        # =============================================================
+        # spring-cloud-gateway 内置RequestSize filter,2.0.1版本以后加入的
+        # 本项目依赖的是2.0.0版本 没有这个内置filter.
+        # =============================================================
+        # RequestSize
+#        - id: request_size_route
+#          uri: http://localhost:8080/upload
+#          predicates:
+#            - Path=/upload
+#          filters:
+#            - name: RequestSize
+#              args:
+#                maxSize: 5000000
+
