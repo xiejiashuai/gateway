@@ -14,6 +14,8 @@ Swagger暂时不支持与Spring WebFlux的聚合，所以需要些特殊整合�
 
 - 声明为`Spring Bean`
 
+- 实例参考工程中的`GatewaySwaggerProvider`
+
 
 
 
