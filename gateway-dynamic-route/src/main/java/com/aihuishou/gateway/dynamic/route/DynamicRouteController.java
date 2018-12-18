@@ -16,10 +16,10 @@ import reactor.core.publisher.Mono;
 @RequestMapping(value = "/dynamic/route", consumes = "application/json;charset=utf-8", produces = "application/json;charset=utf-8")
 public class DynamicRouteController {
 
-    private final DynamicRouteHandler dynamicRouteService;
+    private final DynamicRouteHandler dynamicRouteHandler;
 
-    public DynamicRouteController(DynamicRouteHandler dynamicRouteService) {
-        this.dynamicRouteService = dynamicRouteService;
+    public DynamicRouteController(DynamicRouteHandler dynamicRouteHandler) {
+        this.dynamicRouteHandler = dynamicRouteHandler;
     }
 
 
@@ -28,7 +28,7 @@ public class DynamicRouteController {
 
         return Mono
                 .fromRunnable(
-                        () -> gatewayProperties.getRoutes().forEach(dynamicRouteService::add)
+                        () -> gatewayProperties.getRoutes().forEach(dynamicRouteHandler::add)
                 )
                 .then(Mono.just("success"));
 
@@ -37,14 +37,14 @@ public class DynamicRouteController {
     @PostMapping(value = "/update")
     public Mono<String> update(@RequestBody RouteDefinition routeDefinition) {
 
-        return Mono.just(dynamicRouteService.update(routeDefinition));
+        return Mono.just(dynamicRouteHandler.update(routeDefinition));
 
     }
 
 
     @GetMapping(value = "/delete")
-    public Mono<ResponseEntity<Object>> update(@RequestParam String id) {
-        return dynamicRouteService.delete(id);
+    public Mono<ResponseEntity<Object>> delete(@RequestParam String id) {
+        return dynamicRouteHandler.delete(id);
     }
 
 

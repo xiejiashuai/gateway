@@ -15,6 +15,7 @@
         <module>gateway-swagger</module>
         <module>gateway-dynamic-route</module>
 		<module>gateway-cutomizer</module>
+		<module>gateway-limiter</module>
 	</modules>
 
 	<modelVersion>4.0.0</modelVersion>
@@ -33,16 +34,6 @@
 
 		<dependencies>
 
-			<!-- reactive redis 用于限流实现 -->
-			<!--<dependency>-->
-				<!--<groupId>org.springframework.boot</groupId>-->
-				<!--<artifactId>spring-boot-starter-data-redis-reactive</artifactId>-->
-			<!--</dependency>-->
-			<!--&lt;!&ndash; spring boot 2.x以后 redis客户端默认使用lettuce, lettuce连接池需显示依赖commons-pool2 &ndash;&gt;-->
-			<!--<dependency>-->
-				<!--<groupId>org.apache.commons</groupId>-->
-				<!--<artifactId>commons-pool2</artifactId>-->
-			<!--</dependency>-->
 
 			<!--spring cloud-->
 			<dependency>
