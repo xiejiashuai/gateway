@@ -16,7 +16,8 @@
         <module>gateway-dynamic-route</module>
 		<module>gateway-cutomizer</module>
 		<module>gateway-limiter</module>
-	</modules>
+        <module>gateway-logging</module>
+    </modules>
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.aihuishou.gateway</groupId>
