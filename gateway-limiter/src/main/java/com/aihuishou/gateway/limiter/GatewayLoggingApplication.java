@@ -1,4 +1,4 @@
-package com.aihuishou.gateway.logging;
+package com.aihuishou.gateway.limiter;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
